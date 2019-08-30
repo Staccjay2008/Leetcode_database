@@ -56,3 +56,8 @@ Result table:
 | 2         | "28 Letters"       |
 | 5         | "The Hunger Games" |
 +-----------+--------------------+
+
+select book_id, name from orders o join books b on o.book_id = b.book_id
+where datediff(month, available_from, '2019-06-23') >= 1
+group by book_id, name
+having sum(case when dispath_time < '2019-01-01' then quantity else 0 end) > 10
